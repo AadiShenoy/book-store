@@ -13,5 +13,11 @@ export const setFilteredBooks = (Books) => {
     payload: Books,
   };
 };
+export const setCartBooks = (Books) => {
+  return {
+    type: ActionTypes.SET_CART_BOOKS,
+    payload: Books,
+  };
+};
 
 

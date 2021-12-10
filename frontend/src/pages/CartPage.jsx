@@ -1,14 +1,16 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import Book from "../components/book";
+import Cart from "../components/cart";
 import Appbar from "../components/appbar";
 import { Box } from "@mui/system";
 import bookService from "../service/bookService";
-import {setBooks} from "../actions/bookActions"
+import { setCartBooks } from "../actions/bookActions";
 import { useDispatch } from "react-redux";
-const Dashboard = () => {
+
+const CartPage = () => {
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
+
   useEffect(() => {
     fetchitem();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -16,9 +18,9 @@ const Dashboard = () => {
 
   const fetchitem = () => {
     bookService
-      .getBooks(1)
+      .getCartBooks()
       .then((res) => {
-        dispatch(setBooks(res.data));
+        dispatch(setCartBooks(res.data));
       })
       .catch((err) => {
         console.log(err);
@@ -31,11 +33,11 @@ const Dashboard = () => {
       <Box sx={{ display: "flex" }}>
         <Appbar />
         <Box component="main" className="book-container">
-          <Book/>
+          <Cart />
         </Box>
       </Box>
     );
   }
 };
 
-export default Dashboard;
+export default CartPage;

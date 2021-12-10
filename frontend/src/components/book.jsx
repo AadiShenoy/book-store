@@ -1,31 +1,24 @@
 import {
   Grid,
   Box,
-  CardContent,
-  Card,
-  CardMedia,
   Typography,
-  CardActions,
   Button,
   Menu,
   MenuItem,
+  Pagination,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
+import bookService from "../service/bookService";
+import { setBooks } from "../actions/bookActions";
+import BookCard from "./bookCard";
 const Book = () => {
   const myBooks = useSelector((state) => state.allBooks.filteredbooks);
   const numberOfBooks = myBooks.length;
-  const [wishlist, setWishlist] = useState([]);
-  const [cart, setCart] = useState([]);
 
-  const handleCart = (index) => {
-    setWishlist((prev) => [...prev, { [index]: true }]);
-  };
+  const dispatch = useDispatch();
 
-  const handleWishlist = (index) => {
-    setCart({ [index]: true });
-  };
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -34,6 +27,29 @@ const Book = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handlePagination = (index) => {
+    bookService
+      .getBooks(index)
+      .then((res) => {
+        console.log(res.data);
+        dispatch(setBooks(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDisplayOrder = (order) => {
+    if (order === "low") {
+      myBooks.sort((a, b) => a.price - b.price);
+      handleClose();
+    } else {
+      myBooks.sort((a, b) => b.price - a.price);
+      handleClose();
+    }
+  };
+
   return (
     <Box className="main-container">
       <Grid container>
@@ -62,8 +78,12 @@ const Book = () => {
               "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem>price: low to high</MenuItem>
-            <MenuItem>price: high to low</MenuItem>
+            <MenuItem onClick={() => handleDisplayOrder("low")}>
+              price: low to high
+            </MenuItem>
+            <MenuItem onClick={() => handleDisplayOrder("high")}>
+              price: high to low
+            </MenuItem>
           </Menu>
         </Grid>
       </Grid>
@@ -72,61 +92,17 @@ const Book = () => {
         {myBooks.map((item, index) => {
           return (
             <Grid item xs={12} sm={6} md={3} key={item._id}>
-              <Card sx={{ height: 345 }}>
-                <CardMedia
-                  component="img"
-                  alt="green iguana"
-                  height="171"
-                  image={item.image}
-                />
-                <CardContent>
-                  <Typography align="left" style={{ fontSize: "16px" }}>
-                    {item.title}
-                  </Typography>
-                  <Typography
-                    align="left"
-                    color="text.secondary"
-                    style={{ fontSize: "14px" }}
-                  >
-                    by {item.author}
-                  </Typography>
-                  <Typography
-                    align="left"
-                    style={{ fontWeight: "bold", fontSize: "14px" }}
-                  >
-                    Rs. {item.price}
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  style={{ display: "flex", justifyContent: "space-around" }}
-                >
-                  <Button
-                    onClick={() => handleCart(index)}
-                    fullWidth="true"
-                    style={
-                      !cart[index]
-                        ? { backgroundColor: "#A03037", color: "white" }
-                        : { display: "none" }
-                    }
-                  >
-                    Add to bag
-                  </Button>
-                  <Button
-                    style={
-                      !wishlist[index]
-                        ? { border: "1px solid black", color: "black" }
-                        : { display: "none" }
-                    }
-                    fullWidth="true"
-                    onClick={() => handleWishlist(index)}
-                  >
-                    Wishlist
-                  </Button>
-                </CardActions>
-              </Card>
+              <BookCard item={item} />
             </Grid>
           );
         })}
+        <Pagination
+          count={5}
+          shape="rounded"
+          color="primary"
+          onChange={(event, page) => handlePagination(page)}
+          style={{ margin: "20px auto" }}
+        />
       </Grid>
     </Box>
   );

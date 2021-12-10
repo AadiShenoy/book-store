@@ -14,6 +14,7 @@ const bookRoute = express.Router();
 const bookMiddleware = require("../middleware/book.middleware.js");
 
 // Retrieve all books
-bookRoute.get("/",bookController.findAll);
-
+bookRoute.post("/add-to-cart", bookMiddleware.ensureToken, bookController.addToCart)
+bookRoute.get("/cart",bookMiddleware.ensureToken, bookController.getCart)
+bookRoute.get("/:index",bookMiddleware.ensureToken,bookController.findAll);
 module.exports = bookRoute;

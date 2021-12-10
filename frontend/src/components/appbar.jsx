@@ -15,6 +15,7 @@ import "../styles/home.scss";
 import { useSelector } from "react-redux";
 import { setFilteredBooks } from "../actions/bookActions";
 import { useDispatch } from "react-redux";
+import {Link} from 'react-router-dom'
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   backgroundColor: "#A03037",
@@ -45,7 +46,7 @@ const Appbar = () => {
   return (
     <AppBar position="fixed">
       <Toolbar>
-        <IconButton style={{ marginLeft: "5%" }}>
+        <IconButton style={{ marginLeft: "5%" }} component={Link} to="/Dashboard">
           <ImportContactsIcon fontSize="large" style={{ color: "white" }} />
         </IconButton>
         <Typography variant="h6" id="book-title">
@@ -73,7 +74,7 @@ const Appbar = () => {
         <Typography variant="h6" id="cart-title">
           Cart
         </Typography>
-        <IconButton style={{ color: "white", marginRight: "6%" }}>
+        <IconButton style={{ color: "white", marginRight: "6%" }} component={Link} to="/cart">
           <ShoppingCartIcon fontSize="large" />
         </IconButton>
       </Toolbar>

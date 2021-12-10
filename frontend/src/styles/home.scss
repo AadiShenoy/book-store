@@ -36,3 +36,14 @@
     color:black;
     border:1px solid black
 }
+
+.imageContainer {
+  background-color: #F5F5F5;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bookImage {
+    width: 90px;
+}

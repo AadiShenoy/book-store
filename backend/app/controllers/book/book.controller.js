@@ -18,7 +18,7 @@ class bookController {
    */
   findAll = async (req, res) => {
     try {
-      const data = await bookService.findAll();
+      const data = await bookService.findAll(req.params.index);
       logger.info(data);
       return res.send(data);
     } catch (err) {
@@ -26,6 +26,29 @@ class bookController {
       return res.send(err);
     }
   };
-}
 
+  addToCart = async (req, res) => {
+    let cartDetails = {
+      userId: req.body.userId,
+      book: req.body.book,
+      quantity: req.body.quantity,
+      cost: req.body.cost,
+    };
+    try {
+      let data = await bookService.addToCart(cartDetails);
+      return res.status(200).json(data);
+    } catch (error) {
+      return res.status(500).send("error");
+    }
+  };
+
+  getCart = async (req, res) => {
+    try {
+      let data = await bookService.getCart(req.body.userId);
+      return res.status(200).json(data);
+    } catch (error) {
+      return res.status(404).json(error);
+    }
+  };
+}
 module.exports = new bookController();
