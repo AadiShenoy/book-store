@@ -50,5 +50,24 @@ class bookController {
       return res.status(404).json(error);
     }
   };
+
+  addCustomerDetails = async (req,res) => {
+    try {
+      let data = await bookService.addCustomerDetails(req.body)
+      return res.status(200).json(data);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  }
+
+  getCustomerDetails = async (req, res) => {
+    const userId = req.body.userId;
+    try {
+      let data = await bookService.getCustomerDetails(userId);
+      return res.status(200).json(data);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  };
 }
 module.exports = new bookController();

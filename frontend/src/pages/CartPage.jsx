@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { Redirect } from "react-router-dom";
 import Cart from "../components/cart";
 import Appbar from "../components/appbar";
@@ -20,7 +20,7 @@ const CartPage = () => {
     bookService
       .getCartBooks()
       .then((res) => {
-        dispatch(setCartBooks(res.data));
+        dispatch(setCartBooks(res.data.items));
       })
       .catch((err) => {
         console.log(err);

@@ -1,10 +1,21 @@
-import { Button, Grid, Typography } from "@mui/material";
+import {
+  Button,
+  Grid,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React from "react";
 import { useSelector } from "react-redux";
-
+import CartCard from "./cartCard";
+import CustomerAddress from "./customerAddress";
 const Cart = () => {
-  //const myBooks = useSelector((state) => state.allBooks.cartBooks.items);
-
+  let total = 0;
+  let numberOfBooks = 0;
+  const myBooks = useSelector((state) => state.allBooks.cartBooks);
+  console.log(myBooks);
   return (
     <Grid container>
       <Grid
@@ -13,48 +24,60 @@ const Cart = () => {
         style={{
           border: "1px solid black",
           width: "60%",
-          margin: "5% auto",
+          margin: "4% auto 2% auto",
           padding: "1%",
         }}
       >
         <Grid item xs={4}>
           <Typography style={{ marginBottom: "15px", fontSize: "20px" }}>
-            My Cart(1)
+            My Cart({myBooks.length})
           </Typography>
         </Grid>
         <Grid item xs={8} />
-
-        {/* ----------------------------------------------------------------------- */}
-            <Grid item container>
-              <Grid item xs={4}>
-                <img
-                  className="bookImage"
-                  src="http://books.google.com/books/content?id=tYwq0H5HcrcC&printsec=frontcover&img=1&zoom=5'"
-                  alt=""
-                />
-              </Grid>
-              <Grid item xs={8}>
-                <Typography align="left">Dont make me think</Typography>
-                <Typography
-                  align="left"
-                  color="text.secondary"
-                  style={{ fontSize: "14px" }}
-                >
-                  by steve king
-                </Typography>
-                <Typography
-                  align="left"
-                  style={{ fontWeight: "bold", fontSize: "14px" }}
-                >
-                  Rs 1500
-                </Typography>
-              </Grid>
-            </Grid>
-
-        {/* ----------------------------------------------------------------------- */}
+        {myBooks.map((item, index) => {
+          return <CartCard cart={true} item={item} key={index} />;
+        })}
 
         <Grid item xs={12} align="right">
           <Button variant="contained">Place order</Button>
+        </Grid>
+      </Grid>
+      <CustomerAddress />
+      <Grid
+        item
+        container
+        style={{
+          border: "1px solid black",
+          width: "60%",
+          margin: "0% auto 2% auto",
+          padding: "1%",
+        }}
+      >
+        <Grid item xs={12}>
+          <Accordion elevation={0}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>Order Summary</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {myBooks.map((item, index) => {
+                total += item.book.price * item.quantity;
+                numberOfBooks += item.quantity;
+                return <CartCard item={item} key={index} />;
+              })}
+
+              <Grid item xs={11} align="left" style={{ marginLeft: "35%" }}>
+                <Typography>Number of books : {numberOfBooks}</Typography>
+                <Typography>Total Price : {total}</Typography>
+              </Grid>
+              <Grid item xs={12} align="right">
+                <Button variant="contained">checkout</Button>
+              </Grid>
+            </AccordionDetails>
+          </Accordion>
         </Grid>
       </Grid>
     </Grid>
