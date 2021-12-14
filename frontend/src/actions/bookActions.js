@@ -20,4 +20,17 @@ export const setCartBooks = (Books) => {
   };
 };
 
+export const deleteCart = (Books) => {
+  return {
+    type: ActionTypes.DELETE_CART_BOOK,
+    payload: Books,
+  };
+};
+
+export const updateCartQuantity = (Books) => {
+  return {
+    type: ActionTypes.UPDATE_CART_QUANTITY,
+    payload: Books,
+  };
+};
 
