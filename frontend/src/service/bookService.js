@@ -2,7 +2,7 @@ import AxiosHelper from "../helper/axios";
 const url = require("../config/local");
 
 const getBooks = (index) => {
-  let token = localStorage.getItem("token");
+  let token = sessionStorage.getItem("token");
   let reqobj = {
     method: "get",
     url: url.baseURL + "/book/" + index,
@@ -19,8 +19,7 @@ const getBooks = (index) => {
     });
 };
 
-const getCartBooks = () => {
-  let token = localStorage.getItem("token");
+const getCartBooks = (token) => {
   let reqobj = {
     method: "get",
     url: url.baseURL + "/book/cart",
@@ -38,7 +37,7 @@ const getCartBooks = () => {
 };
 
 const addCartBooks = (data) => {
-  let token = localStorage.getItem("token");
+  let token = sessionStorage.getItem("token");
   let reqobj = {
     method: "post",
     url: url.baseURL + "/book/add-to-cart",
@@ -57,7 +56,7 @@ const addCartBooks = (data) => {
 };
 
 const getCustDetails = () => {
-  let token = localStorage.getItem("token");
+  let token = sessionStorage.getItem("token");
   let reqobj = {
     method: "get",
     url: url.baseURL + "/book/customer-details",
@@ -75,7 +74,7 @@ const getCustDetails = () => {
 };
 
 const addCustDetails = (data) => {
-  let token = localStorage.getItem("token");
+  let token = sessionStorage.getItem("token");
   let reqobj = {
     method: "post",
     url: url.baseURL + "/book/customer-details",
@@ -93,7 +92,7 @@ const addCustDetails = (data) => {
     });
 };
 const removeCartBook = (id) => {
-  let token = localStorage.getItem("token");
+  let token = sessionStorage.getItem("token");
   let reqobj = {
     method: "delete",
     url: url.baseURL + "/book/cart/" + id,
@@ -111,7 +110,7 @@ const removeCartBook = (id) => {
     });
 };
 const searchBook = (searchVal) => {
-  let token = localStorage.getItem("token");
+  let token = sessionStorage.getItem("token");
   let reqobj = {
     method: "post",
     url: url.baseURL + "/book/search",

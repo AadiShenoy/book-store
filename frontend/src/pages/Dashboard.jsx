@@ -1,13 +1,14 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import Book from "../components/book";
 import Appbar from "../components/appbar";
 import { Box } from "@mui/system";
 import bookService from "../service/bookService";
-import {setBooks} from "../actions/bookActions"
+import { setBooks } from "../actions/bookActions";
 import { useDispatch } from "react-redux";
+
 const Dashboard = () => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   const dispatch = useDispatch();
   useEffect(() => {
     fetchitem();
@@ -28,10 +29,10 @@ const Dashboard = () => {
     return <>{<Redirect to="/login" />}</>;
   } else {
     return (
-      <Box sx={{ display: "flex" }}>
+      <Box id="dashboardBox">
         <Appbar />
         <Box component="main" className="book-container">
-          <Book/>
+          <Book />
         </Box>
       </Box>
     );

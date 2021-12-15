@@ -1,5 +1,15 @@
+/* ************************************************************************
+ * Execution        : 1. default node  cmd> nodemon server.js
+ * @descrition      : user model creates user schema and performs db operation
+ * @file            : address.model.js
+ * @author          : Adithya S Shenoy
+ * @version         : 1.0
+ * @since           : 8-Dec-2021
+ *
+ **************************************************************************/
+
 const mongoose = require("mongoose");
-//creation of schema for Address collection
+
 const AddressSchema = mongoose.Schema(
   {
     userId: { type: mongoose.Schema.Types.ObjectId, Ref: "User" },
@@ -23,6 +33,10 @@ const AddressSchema = mongoose.Schema(
 const Address = mongoose.model("Address", AddressSchema);
 
 class AddressModel {
+  /**
+   * @description adds customer details
+   * @returns err or data
+   */
   addCustomerDetails = async (details) => {
     const address = new Address({
       userId: details.userId,
@@ -36,7 +50,6 @@ class AddressModel {
       addressType: details.addressType,
     });
     try {
-      // Save user in the database
       let user = await Address.findOne({ userId: details.userId });
       if (!user) {
         return await address.save({});
@@ -52,6 +65,10 @@ class AddressModel {
     }
   };
 
+  /**
+   * @description gets customer details
+   * @returns err or data
+   */
   getCustomerDetails = async (userId) => {
     try {
       return await Address.findOne({ userId: userId });

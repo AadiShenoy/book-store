@@ -8,7 +8,7 @@ import { setCartBooks } from "../actions/bookActions";
 import { useDispatch } from "react-redux";
 
 const CartPage = () => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,8 +17,9 @@ const CartPage = () => {
   }, []);
 
   const fetchitem = () => {
+    
     bookService
-      .getCartBooks()
+      .getCartBooks(token)
       .then((res) => {
         console.log(res.data.items);
         dispatch(setCartBooks(res.data.items));
@@ -31,7 +32,7 @@ const CartPage = () => {
     return <>{<Redirect to="/login" />}</>;
   } else {
     return (
-      <Box sx={{ display: "flex" }}>
+      <Box id="cartPageBox">
         <Appbar />
         <Box component="main" className="book-container">
           <Cart />

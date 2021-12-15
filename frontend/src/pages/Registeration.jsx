@@ -114,7 +114,7 @@ const Registeration = () => {
           <Grid item container spacing={1} xs={8}>
             <Grid item xs={12}>
               <Typography variant="h5" align="left">
-                <span className="multicolortext">Book Store</span>
+                <span className="multicolortext">Bookstore</span>
               </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -176,11 +176,7 @@ const Registeration = () => {
                 value={user.password}
                 onChange={handleInputChange}
                 error={passwordError}
-                helperText={
-                  passwordError
-                    ? "Invalid password"
-                    : ""
-                }
+                helperText={passwordError ? "Invalid password" : ""}
               />
             </Grid>
             <Grid item xs={6}>

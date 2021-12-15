@@ -52,14 +52,14 @@ const ForgetPassWord = () => {
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <Typography variant="h5">
-              <span className="multicolortext">Book Store</span>
+              <span className="multicolortext">Bookstore</span>
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h5">Find your Book Store password</Typography>
+            <Typography variant="h5">Find your Bookstore password</Typography>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="p">Enter your Book Store email</Typography>
+            <Typography variant="p">Enter your Bookstore email</Typography>
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -79,7 +79,7 @@ const ForgetPassWord = () => {
             </Button>
           </Grid>
           <Grid item xs={6} align="right">
-            <Button variant="contained" type="submit">
+            <Button variant="contained" type="submit" id="submit">
               Submit
             </Button>
           </Grid>
