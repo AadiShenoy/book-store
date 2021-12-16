@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 
 const Dashboard = () => {
   const token = sessionStorage.getItem("token");
+  console.log(token,"punk");
   const dispatch = useDispatch();
   useEffect(() => {
     fetchitem();
@@ -16,14 +17,17 @@ const Dashboard = () => {
   }, []);
 
   const fetchitem = () => {
-    bookService
-      .getBooks(1)
+    if(token !== null){
+      bookService
+      .getBooks(1,token)
       .then((res) => {
+        console.log(res.data);
         dispatch(setBooks(res.data));
       })
       .catch((err) => {
         console.log(err);
       });
+    }
   };
   if (token == null) {
     return <>{<Redirect to="/login" />}</>;

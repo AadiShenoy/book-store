@@ -21,7 +21,6 @@ const CartPage = () => {
     bookService
       .getCartBooks(token)
       .then((res) => {
-        console.log(res.data.items);
         dispatch(setCartBooks(res.data.items));
       })
       .catch((err) => {

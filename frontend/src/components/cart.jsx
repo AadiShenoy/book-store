@@ -7,24 +7,43 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import CartCard from "./cartCard";
 import CustomerAddress from "./customerAddress";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import bookService from "../service/bookService";
 const Cart = () => {
   const [expanded, setExpanded] = React.useState(false);
   const [expandedSummary, setExpandedSummary] = React.useState(false);
   let total = 0;
   let numberOfBooks = 0;
   const myBooks = useSelector((state) => state.allBooks.cartBooks);
-
+  const [success, setSuccess] = useState(false);
   const handleExpanded = () => {
     setExpanded((prev) => !prev);
   };
 
   const handleExpandedSummary = () => {
     setExpandedSummary((prev) => !prev);
+  };
+
+  const handleCheckout = () => {
+    let data = {
+      productList: [myBooks.map((item) => item.book._id)],
+      totalPrice: total,
+    };
+    bookService
+      .addOrder(data)
+      .then((res) => {
+        if (res.data) {
+          sessionStorage.setItem("orderId",res.data.orderId)
+          setSuccess(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -39,12 +58,13 @@ const Cart = () => {
         {myBooks.map((item, index) => {
           return <CartCard cart={true} item={item} key={index} />;
         })}
-
-        <Grid item xs={12} align="right">
-          <Button variant="contained" onClick={handleExpanded}>
-            Place order
-          </Button>
-        </Grid>
+        {myBooks.length > 0 && (
+          <Grid item xs={12} align="right">
+            <Button variant="contained" onClick={handleExpanded}>
+              Place order
+            </Button>
+          </Grid>
+        )}
       </Grid>
 
       <CustomerAddress
@@ -78,15 +98,18 @@ const Cart = () => {
                 <Typography>Number of books : {numberOfBooks}</Typography>
                 <Typography>Total Price : {total}</Typography>
               </Grid>
-              <Grid item xs={12} align="right">
-                <Button variant="contained" component={Link} to="/order">
-                  checkout
-                </Button>
-              </Grid>
+              {myBooks.length > 0 && (
+                <Grid item xs={12} align="right">
+                  <Button variant="contained" onClick={handleCheckout}>
+                    checkout
+                  </Button>
+                </Grid>
+              )}
             </AccordionDetails>
           </Accordion>
         </Grid>
       </Grid>
+      {success && <Redirect to="/order" />}
     </Grid>
   );
 };

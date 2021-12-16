@@ -120,5 +120,16 @@ class bookController {
       return res.status(500).send(err);
     }
   };
+
+  createOrder = async (req, res) => {
+    try {
+      let data = await bookService.createOrder(req.body);
+      logger.info("create order successfull");
+      return res.status(200).send(data);
+    } catch (error) {
+      logger.error(error);
+      return res.status(500).send(error);
+    }
+  };
 }
 module.exports = new bookController();

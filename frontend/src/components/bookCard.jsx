@@ -70,12 +70,11 @@ const BookCard = ({ item }) => {
         >
           <Button
             onClick={handleCart}
-            fullWidth="true"
             style={
               !cart && wishlist
-                ? { background: "#3371B5", color: "white" }
+                ? { background: "#3371B5", color: "white", width: "100%" }
                 : !cart
-                ? { backgroundColor: "#A03037", color: "white" }
+                ? { backgroundColor: "#A03037", color: "white", width: "100%" }
                 : { display: "none" }
             }
           >
@@ -84,10 +83,9 @@ const BookCard = ({ item }) => {
           <Button
             style={
               !wishlist
-                ? { border: "1px solid black", color: "black" }
+                ? { border: "1px solid black", color: "black", width: "100%" }
                 : { display: "none" }
             }
-            fullWidth="true"
             onClick={handleWishlist}
           >
             Wishlist
