@@ -110,8 +110,8 @@ const ResetPassWord = () => {
               onClick={handleShowPassword}
             />
           </Grid>
-          <Grid item xs={6} align="left">
-            <Button variant="contained" component={Link} to="/login">
+          <Grid item xs={6} align="left" >
+            <Button variant="contained" id="submit" component={Link} to="/login">
               sign in
             </Button>
           </Grid>

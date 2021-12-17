@@ -1,11 +1,13 @@
+$brownColor: #A03037;
+
 #link-btn,
 #sign-in-btn {
   text-transform: none;
   font-weight: bold;
-  color: #a03037;
+  color: $brownColor;
 }
 #submit {
-  background-color: #a03037;
+  background-color: $brownColor;
   color: white;
 }
 
@@ -18,7 +20,7 @@
 }
 
 .multicolortext {
-  color: #a03037;
+  color: $brownColor;
   font-weight: bold;
   letter-spacing: 0.8px;
 }
@@ -62,5 +64,5 @@
   width: 90%;
   height: 400px;
   margin-left: 15px;
-  color: #a03037;
+  color: $brownColor;
 }

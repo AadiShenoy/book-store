@@ -33,4 +33,10 @@ export const updateCartQuantity = (Books) => {
     payload: Books,
   };
 };
+export const emptyCart = () => {
+  return {
+    type: ActionTypes.EMPTY_CART,
+  };
+};
+
 

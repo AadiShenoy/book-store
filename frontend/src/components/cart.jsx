@@ -13,15 +13,21 @@ import CartCard from "./cartCard";
 import CustomerAddress from "./customerAddress";
 import { Redirect } from "react-router-dom";
 import bookService from "../service/bookService";
+import { emptyCart } from "../actions/bookActions";
+import { useDispatch } from "react-redux";
+
 const Cart = () => {
+  const dispatch = useDispatch();
   const [expanded, setExpanded] = React.useState(false);
   const [expandedSummary, setExpandedSummary] = React.useState(false);
   let total = 0;
   let numberOfBooks = 0;
   const myBooks = useSelector((state) => state.allBooks.cartBooks);
   const [success, setSuccess] = useState(false);
+  const [checkout, setCheckout] = useState(false);
   const handleExpanded = () => {
     setExpanded((prev) => !prev);
+    setCheckout(true);
   };
 
   const handleExpandedSummary = () => {
@@ -37,7 +43,16 @@ const Cart = () => {
       .addOrder(data)
       .then((res) => {
         if (res.data) {
-          sessionStorage.setItem("orderId",res.data.orderId)
+          sessionStorage.setItem("orderId", res.data.orderId);
+          bookService
+            .removeCart()
+            .then(() => {
+              dispatch(emptyCart());
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
           setSuccess(true);
         }
       })
@@ -98,7 +113,7 @@ const Cart = () => {
                 <Typography>Number of books : {numberOfBooks}</Typography>
                 <Typography>Total Price : {total}</Typography>
               </Grid>
-              {myBooks.length > 0 && (
+              {myBooks.length > 0 && checkout && (
                 <Grid item xs={12} align="right">
                   <Button variant="contained" onClick={handleCheckout}>
                     checkout

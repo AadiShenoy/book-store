@@ -33,7 +33,7 @@ class nodeMailer {
         return data;
       })
       .catch((err) => {
-        return err;
+        throw err;
       });
   };
 }

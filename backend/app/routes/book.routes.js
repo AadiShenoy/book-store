@@ -25,6 +25,9 @@ bookRoute.post("/customer-details", bookMiddleware.ensureToken, bookController.a
 // gets the customer details
 bookRoute.get("/customer-details", bookMiddleware.ensureToken, bookController.getCustomerDetails)
 
+// removes a all books from cart
+bookRoute.delete("/cart", bookMiddleware.ensureToken, bookController.removeCart)
+
 // removes a book from cart
 bookRoute.delete("/cart/:id", bookMiddleware.ensureToken, bookController.deleteCartProduct)
 

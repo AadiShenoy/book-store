@@ -24,13 +24,16 @@ export const bookReducer = (state = initialState, { type, payload }) => {
       return { ...state, cartBooks: updatedCart };
 
     case ActionTypes.UPDATE_CART_QUANTITY:
-      let updatedCartQuantity = state.cartBooks.map((item)=>{
-        if( item.book._id === payload.book){
-          item.quantity = payload.quantity
+      let updatedCartQuantity = state.cartBooks.map((item) => {
+        if (item.book._id === payload.book) {
+          item.quantity = payload.quantity;
         }
-        return item
+        return item;
       });
       return { ...state, cartBooks: updatedCartQuantity };
+
+    case ActionTypes.EMPTY_CART:
+      return { ...state, cartBooks: [] };
 
     default:
       return state;
