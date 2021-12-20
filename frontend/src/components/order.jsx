@@ -1,10 +1,19 @@
+/* ************************************************************************
+ * Execution        : cmd> node index.js
+ * @descrition      : Order component
+ * @file            : order.jsx
+ * @author          : Adithya S Shenoy
+ * @version         : 1.0
+ * @since           : 8-Dec-2021
+ *
+ **************************************************************************/
+
 import { Button, Grid } from "@mui/material";
 import React, { useEffect } from "react";
 import orderImage from "../assets/order.svg";
 import { Link } from "react-router-dom";
 
 const Order = () => {
-
   const orderID = sessionStorage.getItem("orderId");
   useEffect(() => {
     return () => {

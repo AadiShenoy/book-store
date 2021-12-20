@@ -1,3 +1,12 @@
+/* ************************************************************************
+ * Execution        : cmd> node index.js
+ * @descrition      : cart component
+ * @file            : cart.jsx
+ * @author          : Adithya S Shenoy
+ * @version         : 1.0
+ * @since           : 8-Dec-2021
+ *
+ **************************************************************************/
 import {
   Button,
   Grid,
@@ -25,6 +34,7 @@ const Cart = () => {
   const myBooks = useSelector((state) => state.allBooks.cartBooks);
   const [success, setSuccess] = useState(false);
   const [checkout, setCheckout] = useState(false);
+
   const handleExpanded = () => {
     setExpanded((prev) => !prev);
     setCheckout(true);
@@ -34,6 +44,9 @@ const Cart = () => {
     setExpandedSummary((prev) => !prev);
   };
 
+  /***
+   * @description function to checkout|order a book
+   */
   const handleCheckout = () => {
     let data = {
       productList: [myBooks.map((item) => item.book._id)],

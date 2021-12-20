@@ -1,3 +1,13 @@
+/* ************************************************************************
+ * Execution        : cmd> node index.js
+ * @descrition      : Routes File
+ * @file            : route.js
+ * @author          : Adithya S Shenoy
+ * @version         : 1.0
+ * @since           : 8-Dec-2021
+ *
+ **************************************************************************/
+
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Registeration from "./pages/Registeration";

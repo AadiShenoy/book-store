@@ -1,3 +1,13 @@
+/* ************************************************************************
+ * Execution        : cmd> node index.js
+ * @descrition      : User Registeration page
+ * @file            : registeration.jsx
+ * @author          : Adithya S Shenoy
+ * @version         : 1.0
+ * @since           : 8-Dec-2021
+ *
+ **************************************************************************/
+
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import userService from "../service/userService";
@@ -67,6 +77,9 @@ const Registeration = () => {
     setUser({ ...user, [name]: value });
   };
 
+  /***
+   * @description function for user registeration
+   */
   const handleSubmit = (e) => {
     let errorFlag = false;
     e.preventDefault();

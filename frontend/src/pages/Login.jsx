@@ -1,3 +1,12 @@
+/* ************************************************************************
+ * Execution        : cmd> node index.js
+ * @descrition      : user login page
+ * @file            : login.jsx
+ * @author          : Adithya S Shenoy
+ * @version         : 1.0
+ * @since           : 8-Dec-2021
+ *
+ **************************************************************************/
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import userService from "../service/userService";
@@ -41,6 +50,10 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [success, setSuccess] = useState(false);
   const [fail, setFail] = useState(false);
+
+  /***
+   * @description function for user login
+   */
   const handleSubmit = (e) => {
     let errorFlag = false;
     e.preventDefault();

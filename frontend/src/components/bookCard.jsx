@@ -1,3 +1,13 @@
+/* ************************************************************************
+ * Execution        : cmd> node index.js
+ * @descrition      : Book Card component
+ * @file            : bookCard.jsx
+ * @author          : Adithya S Shenoy
+ * @version         : 1.0
+ * @since           : 8-Dec-2021
+ *
+ **************************************************************************/
+
 import React, { useState } from "react";
 import {
   CardContent,
@@ -16,6 +26,10 @@ const BookCard = ({ item }) => {
   const [wishlist, setWishlist] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [cart, setCart] = useState(false);
+
+  /***
+   * @description function to add a book into the cart
+   */
   const handleCart = () => {
     let data = {
       book: item._id,
@@ -32,6 +46,9 @@ const BookCard = ({ item }) => {
       });
   };
 
+  /***
+   * @description function to wishist a book 
+   */
   const handleWishlist = () => {
     setCart(true);
   };

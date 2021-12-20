@@ -1,3 +1,13 @@
+/* ************************************************************************
+ * Execution        : cmd> node index.js
+ * @descrition      : Address details component
+ * @file            : customerAddress.jsx
+ * @author          : Adithya S Shenoy
+ * @version         : 1.0
+ * @since           : 8-Dec-2021
+ *
+ **************************************************************************/
+
 import React, { useState, useEffect } from "react";
 import {
   Button,
@@ -61,10 +71,14 @@ const CustomerAddress = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /***
+   * @description function to fetch customer address details
+   */
   const fetchitem = () => {
     bookService
       .getCustDetails()
       .then((res) => {
+        console.log(res);
         if (res.data !== null) {
           setDetails(res.data);
         }
@@ -74,6 +88,9 @@ const CustomerAddress = ({
       });
   };
 
+  /***
+   * @description function to update customer details
+   */
   const handleUpdate = () => {
     handleExpanded();
     handleExpandedSummary();
@@ -103,7 +120,11 @@ const CustomerAddress = ({
               <Grid item xs={12} align="right">
                 <Button
                   onClick={() => setIsDissabled(false)}
-                  style={{ textTransform: "none", color: "black",fontWeight:"bold" }}
+                  style={{
+                    textTransform: "none",
+                    color: "black",
+                    fontWeight: "bold",
+                  }}
                 >
                   Edit
                 </Button>

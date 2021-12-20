@@ -1,3 +1,13 @@
+/* ************************************************************************
+ * Execution        : cmd> node index.js
+ * @descrition      : cart card component
+ * @file            : cartCard.jsx
+ * @author          : Adithya S Shenoy
+ * @version         : 1.0
+ * @since           : 8-Dec-2021
+ *
+ **************************************************************************/
+
 import React from "react";
 import { Typography, Grid, IconButton, Divider, Button } from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
@@ -11,6 +21,9 @@ const CartCard = ({ cart, item }) => {
   let count = item.quantity;
   const dispatch = useDispatch();
 
+  /***
+   * @description function to update book count in cart
+   */
   const handleUpdate = (type) => {
     let data = {
       book: item.book._id,
@@ -33,6 +46,10 @@ const CartCard = ({ cart, item }) => {
       });
   };
 
+  /***
+   * @description function to delete a book from cart
+   * @param takes book Id
+   */
   const handleDelete = () => {
     bookService
       .removeCartBook(item.book._id)
@@ -72,8 +89,9 @@ const CartCard = ({ cart, item }) => {
             align="left"
             style={{ marginTop: "5px", marginLeft: "0px" }}
           >
-            <IconButton onClick={() => handleUpdate("decrement")}
-             disabled={count <= 1?true:false}
+            <IconButton
+              onClick={() => handleUpdate("decrement")}
+              disabled={count <= 1 ? true : false}
             >
               <RemoveCircleOutlineIcon />
             </IconButton>

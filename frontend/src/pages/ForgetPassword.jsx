@@ -1,3 +1,13 @@
+/* ************************************************************************
+ * Execution        : cmd> node index.js
+ * @descrition      : Forgot Password page
+ * @file            : forgotPassword.jsx
+ * @author          : Adithya S Shenoy
+ * @version         : 1.0
+ * @since           : 8-Dec-2021
+ *
+ **************************************************************************/
+
 import React, { useState } from "react";
 import userService from "../service/userService";
 import { Link } from "react-router-dom";
@@ -36,6 +46,9 @@ const ForgetPassWord = () => {
   const [fail, setFail] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  /***
+   * @description function to handle the form submission
+   */
   const handleSubmit = (e) => {
     let errorFlag = false;
     e.preventDefault();

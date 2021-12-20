@@ -1,3 +1,13 @@
+/* ************************************************************************
+ * Execution        : cmd> node index.js
+ * @descrition      : Order page
+ * @file            : orderPage.jsx
+ * @author          : Adithya S Shenoy
+ * @version         : 1.0
+ * @since           : 8-Dec-2021
+ *
+ **************************************************************************/
+
 import React from "react";
 import { Redirect } from "react-router-dom";
 import Appbar from "../components/appbar";

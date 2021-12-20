@@ -1,10 +1,25 @@
+/* ************************************************************************
+ * Execution        : cmd> node index.js
+ * @descrition      : Book Service
+ * @file            : bookService.js
+ * @author          : Adithya S Shenoy
+ * @version         : 1.0
+ * @since           : 8-Dec-2021
+ *
+ **************************************************************************/
+
 import AxiosHelper from "../helper/axios";
 const url = require("../config/local");
 
-const getBooks = (index, token) => {
+/***
+ * @description function to fetch  books
+ * @param takes token, pageNo. and sort index
+ * @returns response or err
+ */
+const getBooks = (pageNo, token, sortId) => {
   let reqobj = {
     method: "get",
-    url: url.baseURL + "/book/" + index,
+    url: url.baseURL + "/book/" + pageNo + "/" + sortId,
     headers: {
       authorization: `bearer ${token}`,
     },
@@ -18,6 +33,11 @@ const getBooks = (index, token) => {
     });
 };
 
+/***
+ * @description function to fetch cart books
+ * @param takes token
+ * @returns response or err
+ */
 const getCartBooks = (token) => {
   let reqobj = {
     method: "get",
@@ -35,6 +55,11 @@ const getCartBooks = (token) => {
     });
 };
 
+/***
+ * @description function to add books to cart
+ * @param takes data
+ * @returns response or err
+ */
 const addCartBooks = (data) => {
   let token = sessionStorage.getItem("token");
   let reqobj = {
@@ -54,8 +79,13 @@ const addCartBooks = (data) => {
     });
 };
 
+/***
+ * @description function to fetch customer details
+ * @returns response or err
+ */
 const getCustDetails = () => {
   let token = sessionStorage.getItem("token");
+  console.log(token);
   let reqobj = {
     method: "get",
     url: url.baseURL + "/book/customer-details",
@@ -72,6 +102,11 @@ const getCustDetails = () => {
     });
 };
 
+/***
+ * @description function to add customer details
+ * @param takes data
+ * @returns response or err
+ */
 const addCustDetails = (data) => {
   let token = sessionStorage.getItem("token");
   let reqobj = {
@@ -90,6 +125,12 @@ const addCustDetails = (data) => {
       throw err;
     });
 };
+
+/***
+ * @description function to remove cart books
+ * @param takes product ID
+ * @returns response or err
+ */
 const removeCartBook = (id) => {
   let token = sessionStorage.getItem("token");
   let reqobj = {
@@ -107,6 +148,12 @@ const removeCartBook = (id) => {
       throw err;
     });
 };
+
+/***
+ * @description function to search a book
+ * @param takes search key
+ * @returns response or err
+ */
 const searchBook = (searchVal) => {
   let token = sessionStorage.getItem("token");
   let reqobj = {
@@ -125,6 +172,12 @@ const searchBook = (searchVal) => {
       throw err;
     });
 };
+
+/***
+ * @description function to add order details
+ * @param takes data
+ * @returns response or err
+ */
 const addOrder = (data) => {
   let token = sessionStorage.getItem("token");
   let reqobj = {
@@ -144,6 +197,11 @@ const addOrder = (data) => {
     });
 };
 
+/***
+ * @description function to remove cart details
+ * @param takes cartID
+ * @returns response or err
+ */
 const removeCart = (id) => {
   let token = sessionStorage.getItem("token");
   let reqobj = {
