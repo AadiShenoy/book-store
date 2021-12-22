@@ -9,5 +9,5 @@
  **************************************************************************/
 
 module.exports = {
-  url: process.env.URL,
+  url: process.env.MONGO_URL,
 };

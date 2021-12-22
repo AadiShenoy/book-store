@@ -36,7 +36,7 @@ app.use("/book", bookRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //connecting to server
-const server = app.listen(process.env.PORT_NUMBER, () => {
+const server = app.listen(process.env.PORT, () => {
   logger.info("Example app listening at port");
   db.dbConnection();
 });
