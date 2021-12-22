@@ -47,7 +47,7 @@ const BookCard = ({ item }) => {
   };
 
   /***
-   * @description function to wishist a book 
+   * @description function to wishist a book
    */
   const handleWishlist = () => {
     setCart(true);

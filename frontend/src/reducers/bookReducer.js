@@ -38,7 +38,7 @@ export const bookReducer = (state = initialState, { type, payload }) => {
     case ActionTypes.UPDATE_CART_QUANTITY:
       let updatedCartQuantity = state.cartBooks.map((item) => {
         if (item.book._id === payload.book) {
-          item.quantity = payload.quantity;
+          item.quantity = item.quantity+1;
         }
         return item;
       });

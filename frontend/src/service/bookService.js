@@ -85,7 +85,6 @@ const addCartBooks = (data) => {
  */
 const getCustDetails = () => {
   let token = sessionStorage.getItem("token");
-  console.log(token);
   let reqobj = {
     method: "get",
     url: url.baseURL + "/book/customer-details",

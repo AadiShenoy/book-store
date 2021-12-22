@@ -39,7 +39,7 @@ const CartCard = ({ cart, item }) => {
         } else {
           count--;
         }
-        dispatch(updateCartQuantity({ book: item.book._id, quantity: count }));
+        dispatch(updateCartQuantity({ book: item.book._id}));
       })
       .catch((err) => {
         console.log(err);

@@ -28,6 +28,7 @@ const AppBar = styled(MuiAppBar)(({ theme }) => ({
 
 const Appbar = () => {
   const myBooks = useSelector((state) => state.allBooks.books);
+  const cartCount = useSelector((state) => state.allBooks.cartBooks).length;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -88,6 +89,7 @@ const Appbar = () => {
           to="/cart"
         >
           <ShoppingCartIcon fontSize="large" />
+          <span className="cart-count">{cartCount}</span>
         </IconButton>
       </Toolbar>
     </AppBar>

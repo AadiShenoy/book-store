@@ -26,6 +26,11 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import bookService from "../service/bookService";
 import { withStyles } from "@mui/styles";
+import {
+  validFirstName,
+  validPinCode,
+  validPhone,
+} from "../config/formValidation";
 
 const InputField = withStyles({
   root: {
@@ -60,6 +65,9 @@ const CustomerAddress = ({
   };
   const [details, setDetails] = useState(initialUserState);
   const [isDissabled, setIsDissabled] = useState(true);
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+  const [pinError, setPinError] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -78,7 +86,6 @@ const CustomerAddress = ({
     bookService
       .getCustDetails()
       .then((res) => {
-        console.log(res);
         if (res.data !== null) {
           setDetails(res.data);
         }
@@ -92,17 +99,37 @@ const CustomerAddress = ({
    * @description function to update customer details
    */
   const handleUpdate = () => {
-    handleExpanded();
-    handleExpandedSummary();
-    setIsDissabled(true);
-    bookService
-      .addCustDetails(details)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    let errorFlag = false;
+    setFirstNameError(false);
+    setPhoneError(false);
+    setPinError(false);
+    if (!validFirstName.test(details.name)) {
+      errorFlag = true;
+      setFirstNameError(true);
+    }
+    if (!validPhone.test(details.phone)) {
+      errorFlag = true;
+      setPhoneError(true);
+    }
+    if (!validPinCode.test(details.pincode)) {
+      errorFlag = true;
+      setPinError(true);
+    }
+    if (errorFlag) {
+      console.log("Enter the correct details");
+    } else {
+      handleExpanded();
+      handleExpandedSummary();
+      setIsDissabled(true);
+      bookService
+        .addCustDetails(details)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
   return (
     <Grid item container id="cartContainer">
@@ -140,6 +167,8 @@ const CustomerAddress = ({
                   value={details.name}
                   onChange={handleInputChange}
                   fullWidth
+                  error={firstNameError}
+                  helperText={firstNameError ? "Invalid Name" : ""}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -153,6 +182,8 @@ const CustomerAddress = ({
                   variant="outlined"
                   fullWidth
                   disabled={isDissabled ? true : false}
+                  error={phoneError}
+                  helperText={phoneError ? "Invalid Mobile Number" : ""}
                 />
               </Grid>
 
@@ -167,6 +198,8 @@ const CustomerAddress = ({
                   onChange={handleInputChange}
                   fullWidth
                   disabled={isDissabled ? true : false}
+                  error={pinError}
+                  helperText={pinError ? "Invalid Pin Code" : ""}
                 />
               </Grid>
               <Grid item xs={6}>

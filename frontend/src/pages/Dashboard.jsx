@@ -14,13 +14,13 @@ import Book from "../components/book";
 import Appbar from "../components/appbar";
 import { Box } from "@mui/system";
 import bookService from "../service/bookService";
-import { setBooks } from "../actions/bookActions";
+import { setBooks, setCartBooks } from "../actions/bookActions";
 import { useDispatch } from "react-redux";
 
 const Dashboard = () => {
   const token = sessionStorage.getItem("token");
   const dispatch = useDispatch();
-  const [count,setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     fetchitem();
@@ -35,10 +35,18 @@ const Dashboard = () => {
   const fetchitem = () => {
     if (token !== null) {
       bookService
-        .getBooks(1, token)
+        .getBooks(1, token,0)
         .then((res) => {
-          setCount(res.data.count)
+          setCount(res.data.count);
           dispatch(setBooks(res.data.data));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      bookService
+        .getCartBooks(token)
+        .then((res) => {
+          dispatch(setCartBooks(res.data.items));
         })
         .catch((err) => {
           console.log(err);
@@ -52,7 +60,7 @@ const Dashboard = () => {
       <Box id="dashboardBox">
         <Appbar />
         <Box component="main" className="book-container">
-          <Book count ={count} />
+          <Book count={count} />
         </Box>
       </Box>
     );
