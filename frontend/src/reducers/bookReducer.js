@@ -16,6 +16,7 @@ const initialState = {
   cartBooks: [],
   sortIndex: 0,
   pageNumber: 1,
+  searchState: true,
 };
 
 export const bookReducer = (state = initialState, { type, payload }) => {
@@ -38,7 +39,7 @@ export const bookReducer = (state = initialState, { type, payload }) => {
     case ActionTypes.UPDATE_CART_QUANTITY:
       let updatedCartQuantity = state.cartBooks.map((item) => {
         if (item.book._id === payload.book) {
-          item.quantity = item.quantity+1;
+          item.quantity = item.quantity + 1;
         }
         return item;
       });
@@ -49,9 +50,12 @@ export const bookReducer = (state = initialState, { type, payload }) => {
 
     case ActionTypes.SET_SORT:
       return { ...state, sortIndex: payload };
-      
+
     case ActionTypes.SET_PGNO:
       return { ...state, pageNumber: payload };
+
+    case ActionTypes.SET_SEARCH_STATE:
+      return { ...state, searchState: payload };
 
     default:
       return state;

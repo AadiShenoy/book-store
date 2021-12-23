@@ -61,4 +61,11 @@ export const setPgno = (pgNo) => {
   };
 };
 
+export const setSearchState = (state) => {
+  return {
+      type: ActionTypes.SET_SEARCH_STATE,
+      payload: state,
+  };
+};
+
 

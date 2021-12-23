@@ -34,12 +34,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Book = ({count}) => {
+const Book = ({ count }) => {
   const classes = useStyles();
   const token = sessionStorage.getItem("token");
   const myBooks = useSelector((state) => state.allBooks.filteredbooks);
   const pageNo = useSelector((state) => state.allBooks.pageNumber);
   const sortIndex = useSelector((state) => state.allBooks.sortIndex);
+  const searchState = useSelector((state) => state.allBooks.searchState);
   const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -151,14 +152,16 @@ const Book = ({count}) => {
         })}
       </Grid>
 
-      <div id="pagination">
-        <Pagination
-          count={5}
-          shape="rounded"
-          classes={{ ul: classes.ul }}
-          onChange={(event, page) => handlePagination(page)}
-        />
-      </div>
+      {searchState && (
+        <div id="pagination">
+          <Pagination
+            count={5}
+            shape="rounded"
+            classes={{ ul: classes.ul }}
+            onChange={(event, page) => handlePagination(page)}
+          />
+        </div>
+      )}
     </Box>
   );
 };

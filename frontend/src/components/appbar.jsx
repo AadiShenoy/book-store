@@ -17,7 +17,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import "../styles/home.scss";
 import { useSelector } from "react-redux";
-import { setFilteredBooks, setSort } from "../actions/bookActions";
+import { setFilteredBooks, setSearchState, setSort } from "../actions/bookActions";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import bookService from "../service/bookService";
@@ -44,6 +44,7 @@ const Appbar = () => {
   const handleSearch = (searchValue) => {
     if (searchValue.length >= 3) {
       dispatch(setSort(0));
+      dispatch(setSearchState(false))
       bookService
         .searchBook({ searchTxt: searchValue })
         .then((res) => {
